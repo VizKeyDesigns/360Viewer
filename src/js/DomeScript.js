@@ -1052,8 +1052,8 @@ class DomeScript {
                 event.stopPropagation();
                 event.preventDefault();
             }
-            let subject = "3D Dome Viewer: " + DMGroup + " - " + DMProject;
-            let body = "Here is the " + DMGroup + " - " + DMProject + " 3D Dome Viewer project for your review:\r\n\r\n<";
+            let subject = "360 Viewer: " + DMGroup + " - " + DMProject;
+            let body = "Here is the " + DMGroup + " - " + DMProject + "360 Viewer project for your review:\r\n\r\n<";
             body += CameraURL;
             body += ">";
 
@@ -1103,7 +1103,7 @@ class DomeScript {
             // Request a Feature
             // Report a bug
             $("#ContactReport").fadeOut("fast");
-            let subject = "3D Dome Viewer - " + contacttype + ": " + DMGroup + " - " + DMProject;
+            let subject = "360 Viewer - " + contacttype + ": " + DMGroup + " - " + DMProject;
             if (contacttype == "Incorrect Visual Element") {
                 contacttype = "point out an " + contacttype;
             }
