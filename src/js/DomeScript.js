@@ -593,7 +593,9 @@ function PreloadATexture(obj) {
         return;
     }
     obj.DomeImage = "loading";
-    const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
+    //const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
+    const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg';
+
     // Debugging
     console.log("DMGroup:", DMGroup);
     console.log("DMProject:", DMProject);
