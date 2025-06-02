@@ -579,48 +579,42 @@ class DomeScript {
         // ============= Image Loading Start =====================
 
 
-        function PreloadATexture(obj) {
+function PreloadATexture(obj) {
 
-            let id = GetVersionGroupID(new THREE.Vector3(chosenCamObj.SceneData.x, chosenCamObj.SceneData.y, chosenCamObj.SceneData.z));
-            if (!VersionGroups[id].includes(obj) && chosenCamObj != obj && loadingQueue.length > 2) return;
+    let id = GetVersionGroupID(new THREE.Vector3(chosenCamObj.SceneData.x, chosenCamObj.SceneData.y, chosenCamObj.SceneData.z));
+    if (!VersionGroups[id].includes(obj) && chosenCamObj != obj && loadingQueue.length > 2) return;
 
-            if (loaded.includes(obj.name)) return;
-            loaded.push(obj.name);
+    if (loaded.includes(obj.name)) return;
+    loaded.push(obj.name);
 
-            loadingQueue.push(obj.name);
-            if (obj.DomeImage != undefined) {
-                if (chosenCamObj == obj) { ChangePOV(obj); }
-                return;
-            }
-            obj.DomeImage = "loading";
-            const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
-//Debugging
-console.log("DMGroup:", DMGroup);
-console.log("DMProject:", DMProject);
-console.log("SceneData.CacheTime:", SceneData?.CacheTime);
-console.log("Image src:", src);
-console.log("DomeProjectData:", DomeProjectData);
+    loadingQueue.push(obj.name);
+    if (obj.DomeImage != undefined) {
+        if (chosenCamObj == obj) { ChangePOV(obj); }
+        return;
+    }
+    obj.DomeImage = "loading";
+    const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
+    // Debugging
+    console.log("DMGroup:", DMGroup);
+    console.log("DMProject:", DMProject);
+    console.log("SceneData.CacheTime:", SceneData?.CacheTime);
+    console.log("Image src:", src);
+    console.log("DomeProjectData:", DomeProjectData);
 
-            obj.DomeImage = new THREE.TextureLoader().load(src, function (tex) {
-                tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-                tex.minFilter = THREE.LinearFilter;
-                tex.generateMipmaps = false;
-                tex.wrapS = THREE.RepeatWrapping;
-                tex.repeat.x = -1.001; // -1 causes stretching bug
+    obj.DomeImage = new THREE.TextureLoader().load(src, function (tex) {
+        tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        tex.minFilter = THREE.LinearFilter;
+        tex.generateMipmaps = false;
+        tex.wrapS = THREE.RepeatWrapping;
+        tex.repeat.x = -1.001; // -1 causes stretching bug
 
-                loadingQueue.splice(loadingQueue.indexOf(obj.name), 1);
-                if ($("#LoadingWord")[0].innerText != "Complete") {
-                    $("#LoadingWord")[0].innerText = "Complete";
-                    AddEvents();
-                    $("#Loading").fadeTo("slow", 0, function () {
-                        $("#Loading").hide();
-                    });
-                }
+        loadingQueue.splice(loadingQueue.indexOf(obj.name), 1);
+        if ($("#LoadingWord")[0].innerText != "Complete") {
+            $("#LoadingWord")[0].innerText = "Complete";
+            AddEvents();
+            $("#Loading").fadeTo("slow", 0, function () {
+                $("#Loading").hide();
             });
-        }
-
-        if (chosenCamObj == obj) {
-            ChangePOV(obj); // this might set position, rotation, or trigger a render
         }
     });
 }
