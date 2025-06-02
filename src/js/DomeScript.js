@@ -595,11 +595,7 @@ function PreloadATexture(obj) {
     obj.DomeImage = "loading";
     //const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime; (this was the origional method for sourcing images)
     const src = uploadsDir + DMGroup + '/' + DMProject + '/lowres/' + obj.name + '.jpg';
-
-    //Possible solution?
-    //const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg' +
-            //(SceneData.CacheTime ? '?v=' + SceneData.CacheTime : '');
-
+    
     // Debugging
     console.log("DMGroup:", DMGroup);
     console.log("DMProject:", DMProject);
@@ -812,8 +808,9 @@ function PreloadATexture(obj) {
                         if (CurrentDome.material.map.image.src == undefined) { console.log("e"); return; }
 
                         let ff = String(CurrentDome.material.map.image.src);
-                        if (ff.includes("/lowRes/")) {
-                            let src = uploadsDir + DMGroup + '/' + DMProject + '/' + chosenCamObj.name + '.jpg?v=' + SceneData.CacheTime;
+                        if (ff.includes("/lowres/")) {
+                            //let src = uploadsDir + DMGroup + '/' + DMProject + '/' + chosenCamObj.name + '.jpg?v=' + SceneData.CacheTime;
+                            let src = uploadsDir + DMGroup + '/' + DMProject + '/' + chosenCamObj.name + '.jpg';
                             console.log("loading Highres: " + src);
                             chosenCamObj.DomeImage = new THREE.TextureLoader().load(src, function (tex) {
                                 tex.minFilter = THREE.LinearFilter;
