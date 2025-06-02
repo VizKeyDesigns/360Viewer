@@ -593,8 +593,12 @@ function PreloadATexture(obj) {
         return;
     }
     obj.DomeImage = "loading";
-    //const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
+    //const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime; (this was the origional method for sourcing images)
     const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg';
+
+    //Possible solution?
+    //const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg' +
+            //(SceneData.CacheTime ? '?v=' + SceneData.CacheTime : '');
 
     // Debugging
     console.log("DMGroup:", DMGroup);
