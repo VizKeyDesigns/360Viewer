@@ -594,6 +594,11 @@ class DomeScript {
             }
             obj.DomeImage = "loading";
             const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
+//Debugging
+console.log("DMGroup:", DMGroup);
+console.log("DMProject:", DMProject);
+console.log("SceneData.CacheTime:", SceneData?.CacheTime);
+console.log("Image src:", src);
 
             obj.DomeImage = new THREE.TextureLoader().load(src, function (tex) {
                 tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
