@@ -576,44 +576,56 @@ class DomeScript {
 
 
 
-        // ============= Image Loading Start =====================
+        // ============= Image Loading Start ===================== NEW 6/1/25 TEST
 
 
-        function PreloadATexture(obj) {
+function PreloadATexture(obj) {
+    let id = GetVersionGroupID(new THREE.Vector3(chosenCamObj.SceneData.x, chosenCamObj.SceneData.y, chosenCamObj.SceneData.z));
+    if (!VersionGroups[id].includes(obj) && chosenCamObj != obj && loadingQueue.length > 2) return;
 
-            let id = GetVersionGroupID(new THREE.Vector3(chosenCamObj.SceneData.x, chosenCamObj.SceneData.y, chosenCamObj.SceneData.z));
-            if (!VersionGroups[id].includes(obj) && chosenCamObj != obj && loadingQueue.length > 2) return;
+    if (loaded.includes(obj.name)) return;
+    loaded.push(obj.name);
 
-            if (loaded.includes(obj.name)) return;
-            loaded.push(obj.name);
+    loadingQueue.push(obj.name);
 
-            loadingQueue.push(obj.name);
-            if (obj.DomeImage != undefined) {
-                if (chosenCamObj == obj) { ChangePOV(obj); }
-                return;
-            }
-            obj.DomeImage = "loading";
+    if (obj.DomeImage != undefined) {
+        if (chosenCamObj == obj) { ChangePOV(obj); }
+        return;
+    }
 
-            const src = uploadsDir + DMGroup + '/' + DMProject + '/' + chosenCamObj.name + '.jpg?v=' + SceneData.CacheTime;
-            //const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime; (This is the origional method to source low res images)
+    obj.DomeImage = "loading";
 
-            obj.DomeImage = new THREE.TextureLoader().load(src, function (tex) {
-                tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-                tex.minFilter = THREE.LinearFilter;
-                tex.generateMipmaps = false;
-                tex.wrapS = THREE.RepeatWrapping;
-                tex.repeat.x = -1.001; // -1 causes stretching bug
+    const src = uploadsDir + DMGroup + '/' + DMProject + '/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
 
-                loadingQueue.splice(loadingQueue.indexOf(obj.name), 1);
-                if ($("#LoadingWord")[0].innerText != "Complete") {
-                    $("#LoadingWord")[0].innerText = "Complete";
-                    AddEvents();
-                    $("#Loading").fadeTo("slow", 0, function () {
-                        $("#Loading").hide();
-                    });
-                }
+    new THREE.TextureLoader().load(src, function (tex) {
+        tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+        tex.minFilter = THREE.LinearFilter;
+        tex.generateMipmaps = false;
+        tex.wrapS = THREE.RepeatWrapping;
+        tex.repeat.x = -1.001;
+
+        // ✅ Assign the texture to your material
+        skyboxMesh.material.map = tex;
+        skyboxMesh.material.needsUpdate = true;
+
+        obj.DomeImage = tex;
+
+        loadingQueue.splice(loadingQueue.indexOf(obj.name), 1);
+
+        if ($("#LoadingWord")[0].innerText != "Complete") {
+            $("#LoadingWord")[0].innerText = "Complete";
+            AddEvents();
+            $("#Loading").fadeTo("slow", 0, function () {
+                $("#Loading").hide();
             });
         }
+
+        if (chosenCamObj == obj) {
+            ChangePOV(obj); // this might set position, rotation, or trigger a render
+        }
+    });
+}
+
 
         function PreloadLowResTextures() {
 
