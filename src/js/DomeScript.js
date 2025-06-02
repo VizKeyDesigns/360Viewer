@@ -599,6 +599,7 @@ console.log("DMGroup:", DMGroup);
 console.log("DMProject:", DMProject);
 console.log("SceneData.CacheTime:", SceneData?.CacheTime);
 console.log("Image src:", src);
+console.log("DomeProjectData:", DomeProjectData);
 
             obj.DomeImage = new THREE.TextureLoader().load(src, function (tex) {
                 tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
