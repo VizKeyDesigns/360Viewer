@@ -594,7 +594,7 @@ function PreloadATexture(obj) {
     }
     obj.DomeImage = "loading";
     //const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime; (this was the origional method for sourcing images)
-    const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg';
+    const src = uploadsDir + DMGroup + '/' + DMProject + '/lowres/' + obj.name + '.jpg';
 
     //Possible solution?
     //const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg' +
