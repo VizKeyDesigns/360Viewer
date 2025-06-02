@@ -576,47 +576,42 @@ class DomeScript {
 
 
 
-        // ============= Image Loading Start ===================== NEW 6/1/25 TEST
+        // ============= Image Loading Start =====================
 
 
-function PreloadATexture(obj) {
-    let id = GetVersionGroupID(new THREE.Vector3(chosenCamObj.SceneData.x, chosenCamObj.SceneData.y, chosenCamObj.SceneData.z));
-    if (!VersionGroups[id].includes(obj) && chosenCamObj != obj && loadingQueue.length > 2) return;
+        function PreloadATexture(obj) {
 
-    if (loaded.includes(obj.name)) return;
-    loaded.push(obj.name);
+            let id = GetVersionGroupID(new THREE.Vector3(chosenCamObj.SceneData.x, chosenCamObj.SceneData.y, chosenCamObj.SceneData.z));
+            if (!VersionGroups[id].includes(obj) && chosenCamObj != obj && loadingQueue.length > 2) return;
 
-    loadingQueue.push(obj.name);
+            if (loaded.includes(obj.name)) return;
+            loaded.push(obj.name);
 
-    if (obj.DomeImage != undefined) {
-        if (chosenCamObj == obj) { ChangePOV(obj); }
-        return;
-    }
+            loadingQueue.push(obj.name);
+            if (obj.DomeImage != undefined) {
+                if (chosenCamObj == obj) { ChangePOV(obj); }
+                return;
+            }
+            obj.DomeImage = "loading";
 
-    obj.DomeImage = "loading";
+            const src = uploadsDir + DMGroup + '/' + DMProject + '/' + chosenCamObj.name + '.jpg?v=' + SceneData.CacheTime;
+            //const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime; (This is the origional method to source low res images)
 
-    const src = uploadsDir + DMGroup + '/' + DMProject + '/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
+            obj.DomeImage = new THREE.TextureLoader().load(src, function (tex) {
+                tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
+                tex.minFilter = THREE.LinearFilter;
+                tex.generateMipmaps = false;
+                tex.wrapS = THREE.RepeatWrapping;
+                tex.repeat.x = -1.001; // -1 causes stretching bug
 
-    new THREE.TextureLoader().load(src, function (tex) {
-        tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
-        tex.minFilter = THREE.LinearFilter;
-        tex.generateMipmaps = false;
-        tex.wrapS = THREE.RepeatWrapping;
-        tex.repeat.x = -1.001;
-
-        // ✅ Assign the texture to your material
-        skyboxMesh.material.map = tex;
-        skyboxMesh.material.needsUpdate = true;
-
-        obj.DomeImage = tex;
-
-        loadingQueue.splice(loadingQueue.indexOf(obj.name), 1);
-
-        if ($("#LoadingWord")[0].innerText != "Complete") {
-            $("#LoadingWord")[0].innerText = "Complete";
-            AddEvents();
-            $("#Loading").fadeTo("slow", 0, function () {
-                $("#Loading").hide();
+                loadingQueue.splice(loadingQueue.indexOf(obj.name), 1);
+                if ($("#LoadingWord")[0].innerText != "Complete") {
+                    $("#LoadingWord")[0].innerText = "Complete";
+                    AddEvents();
+                    $("#Loading").fadeTo("slow", 0, function () {
+                        $("#Loading").hide();
+                    });
+                }
             });
         }
 
