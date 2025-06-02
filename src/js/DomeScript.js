@@ -593,9 +593,7 @@ class DomeScript {
                 return;
             }
             obj.DomeImage = "loading";
-            const src = uploadsDir + DMGroup + '/' + DMProject + '/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
-            //const src = uploadsDir + DMGroup + '/' + DMProject + '/' + chosenCamObj.name + '.jpg?v=' + SceneData.CacheTime;
-            //const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime; (This is the origional method to source low res images)
+            const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
 
             obj.DomeImage = new THREE.TextureLoader().load(src, function (tex) {
                 tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
