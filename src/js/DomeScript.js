@@ -45,8 +45,6 @@ class DomeScript {
         let uploadsDir = './uploads/360Projects/';
 
 
-        // this is the old way that was index based
-        // let chosenPOV = 0; // index of the current camera
         // the selected camera to jump to
         let chosenCamObj;
 
@@ -252,10 +250,9 @@ class DomeScript {
                 5, // numpoints
                 45 // buffer
             );
-            // console.log(DynamicFloor);
-            // console.log(dynfloor);
 
-            const floor_meshes = dynfloor.floor_meshes; // dynfloor.clusterpoints(campositions, 90);
+
+            const floor_meshes = dynfloor.floor_meshes;
             for (let i = 0; i < floor_meshes.length; i++) {
                 multideck.add(floor_meshes[i]);
             }
@@ -593,7 +590,6 @@ function PreloadATexture(obj) {
         return;
     }
     obj.DomeImage = "loading";
-    //const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime; (this was the origional method for sourcing images)
     const src = uploadsDir + DMGroup + '/' + DMProject + '/lowres/' + obj.name + '.jpg';
     
     // Debugging
