@@ -27,12 +27,24 @@
             margin-bottom: 0.3em;
         }
 
-        .sub-projects {
-            padding-left: 1.5em;
+        #ProjectTable {
+            display: flex;
+            gap: 40px;
         }
 
-        .project-group {
-            margin-bottom: 2em;
+        #ProjectGroupDiv,
+        #ProjectListDiv {
+            flex: 1;
+        }
+
+        .groupLinks,
+        .projectLinks {
+            cursor: pointer;
+        }
+
+        .groupLinkselected {
+            font-weight: bold;
+            color: #007acc;
         }
     </style>
 </head>
@@ -41,8 +53,19 @@
     <h1>VizKey Designs</h1>
     <h2>Projects</h2>
 
-    <div id="ProjectContainer">
-        <!-- Populated by JS -->
+    <div id="PROJECTS">
+        <div id="ProjectTable">
+            <div id="ProjectGroupDiv">
+                <h3>Groups</h3>
+                <ul id="ProjectGroupList"></ul>
+            </div>
+
+            <div id="ProjectListDiv">
+                <h3>Projects</h3>
+                <ul id="ProjectList"></ul>
+                <div id="Choose">Please choose a category from the list on the left.</div>
+            </div>
+        </div>
     </div>
 
     <script type="module" src="src/js/indexScript.js"></script>
