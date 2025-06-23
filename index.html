@@ -14,7 +14,7 @@
             line-height: 1.6;
         }
 
-        h1, h2 {
+        h1, h2, h3 {
             color: #2c3e50;
         }
 
@@ -24,7 +24,7 @@
         }
 
         li {
-            margin-bottom: 0.5em;
+            margin-bottom: 0.3em;
         }
 
         .sub-projects {
@@ -41,31 +41,10 @@
     <h1>VizKey Designs</h1>
     <h2>Projects</h2>
 
-    <div class="project-group">
-        <h3>Main Project 1</h3>
-        <ul class="sub-projects">
-            <li>Sub Project A</li>
-            <li>Sub Project B</li>
-            <li>Sub Project C</li>
-        </ul>
+    <div id="ProjectContainer">
+        <!-- Populated by JS -->
     </div>
 
-    <div class="project-group">
-        <h3>Main Project 2</h3>
-        <ul class="sub-projects">
-            <li>Sub Project D</li>
-            <li>Sub Project E</li>
-        </ul>
-    </div>
-
-    <div class="project-group">
-        <h3>Main Project 3</h3>
-        <ul class="sub-projects">
-            <li>Sub Project F</li>
-            <li>Sub Project G</li>
-            <li>Sub Project H</li>
-        </ul>
-    </div>
-
+    <script type="module" src="src/js/indexScript.js"></script>
 </body>
 </html>
