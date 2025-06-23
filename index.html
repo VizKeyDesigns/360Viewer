@@ -15,17 +15,15 @@
     <link rel="shortcut icon" href="favicon.ico">
     
     <!-- JavaScript libraries and scripts -->
-    <script src="src/js/jquery-2.1.0.min.js">
-    </script>
+    <script src="src/js/jquery-2.1.0.min.js"></script>
 
     <script type="module">
         import { indexScript } from './src/js/indexScript.js';
         window.onload = function() {
-            let ins = new indexScript(); // Ensure 'new' keyword is used
-            ins.START(); // Call the START method
+            let ins = new indexScript();
+            ins.START();
         };
     </script>
-    
 </head>
 <body>
     <!-- Background section -->
@@ -58,6 +56,5 @@
             </div>
         </div>
     </div>
-    
 </body>
 </html>
