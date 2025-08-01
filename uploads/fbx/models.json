@@ -1,15 +1,15 @@
 [
-	"Test/wm738-514spd",
-	"Test/4COVE",
-	"Test/6cove",
-	"Test/314bbc",
-	"Test/314hl",
-	"Test/414hl",
-	"Test/714craftfj",
-	"Test/jambs",
-	"Test/Trim_001",
-	"Test/wm48-414cr",
-	"Test/wm48-612cr",
-	"Test/WM48-514cr",
-	"Test/wm413-514crft"
+  "Test/wm738_514spd",
+  "Test/4COVE",
+  "Test/6cove",
+  "Test/314bbc",
+  "Test/314hl",
+  "Test/414hl",
+  "Test/714craftfj",
+  "Test/jambs",
+  "Test/Trim_001",
+  "Test/wm48_414cr",
+  "Test/wm48_612cr",
+  "Test/WM48_514cr",
+  "Test/wm413_514crft"
 ]
